@@ -1,0 +1,60 @@
+{% extends 'User/userHome.html' %}
+{% load static %}
+{% block content %}
+<section class="about py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3layouts py-lg-5 py-3">
+            <div class="row">
+                <div class="col-lg-6 about-right px-lg-5 px-2 mt-lg-5 mt-2">
+
+                    <h2 class="tittle"><span class="sub-tittle">You look {{final_output}} </span></h2>
+                    <h3 class="tittle"><span class="sub-tittle"></span>Let's have fun...!</h3>
+                    <p class="my-4 text-justify">What would you prefer</p>
+
+                    <a href="/movies/{{final_output}}" class="read my-3 btn"><span class="fa fa-long-arrow-alt-right"></span> Movies</a>
+                    <!-- <h6 class="my-3">Follows On:</h6>
+                    <ul class="social-icons text-center d-flex">
+                        <li>
+                            <a href="#">
+                           Facebook
+                        </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                            Twitter
+                        </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                          Google +
+                        </a>
+                        </li>
+
+                    </ul> -->
+
+                </div>
+                <div class="col-lg-6 about-img">
+                    <img src="{% static 'images/ab.png' %}" class="img-fluid" alt="user-image">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- <div class="content"> -->
+            <!-- <h1 class="slide-left">Our <br> Website</h1>
+            <p class="slide-left">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            <div class="links slide-left"> -->
+                <!-- <div class="output" >
+                    {% if final_output %}
+                    <h2 style="font-family:Bio-Rhyme; color: bisque;margin:40px;font:40px">You look {{final_output}}</h2>
+                    <h1 style="font-family:Bio-Rhyme; color: bisque;margin:40px;font:40px; font-size:70px">Let's have fun...!</h1>
+                    <h2 style="font-family:Bio-Rhyme; color: bisque;margin:40px;font:40px">What would you prefer</h2>
+                    {% endif %}
+                </div>
+                <a href="/movies/{{final_output}}" class="btn">MOVIES</a> -->
+                <!-- <a href="http://localhost:5000/songs/{{final_output}}" class="btn">SONGS</a> -->
+            <!-- </div>
+        </div> -->
+
+   
+{% endblock %}

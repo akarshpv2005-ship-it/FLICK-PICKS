@@ -1,0 +1,62 @@
+{% extends 'admin/adminhome.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.feedback-section {
+    background: #0f0f0f;
+    min-height: 100vh;
+    padding: 60px 0;
+}
+
+.feedback-card {
+    background: #1c1c1c;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.feedback-card h5 {
+    color: #e50914;
+    font-weight: 600;
+}
+
+.feedback-card p {
+    color: #ddd;
+}
+
+.feedback-meta {
+    font-size: 13px;
+    color: #aaa;
+}
+</style>
+
+<section class="feedback-section">
+    <div class="container">
+        <h3 class="text-center text-white mb-5">
+            <span style="color:#e50914;">User</span> Feedback
+        </h3>
+
+        {% if feedbacks %}
+            {% for f in feedbacks %}
+                <div class="feedback-card">
+                    <h5>{{ f.subject }}</h5>
+                    <p>{{ f.feedback }}</p>
+
+                    <div class="feedback-meta">
+                        {% if request.session.uid %}
+                            By: {{ f.user.username }} |
+                        {% endif %}
+                        {{ f.created_at|date:"d M Y, h:i A" }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-light">No feedback available.</p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

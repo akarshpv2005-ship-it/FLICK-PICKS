@@ -1,0 +1,150 @@
+{% extends 'admin/adminhome.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<style>
+/* ===== PAGE STYLING ===== */
+.contact {
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
+    url("{% static 'images/login-bg.jpg' %}") center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.inner-sec-w3layouts {
+    background: rgba(15, 15, 15, 0.95);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+.tittle {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.sub-tittle {
+    color: #e50914;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.main input,
+.main select,
+.main textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background: #1c1c1c;
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.main textarea {
+    border-radius: 15px;
+    min-height: 120px;
+    resize: none;
+}
+
+.main input::placeholder,
+.main textarea::placeholder {
+    color: #aaa;
+}
+
+.main input:focus,
+.main select:focus,
+.main textarea:focus {
+    border: 1px solid #e50914;
+}
+
+.main select option {
+    background: #1c1c1c;
+    color: #fff;
+}
+
+/* ===== BUTTON ===== */
+.book input[type="submit"] {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    padding: 12px 45px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.book input[type="submit"]:hover {
+    background: #b20710;
+    transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 768px) {
+    .inner-sec-w3layouts {
+        padding: 30px 20px;
+    }
+}
+</style>
+
+<section class="about contact py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3layouts py-lg-5 py-3">
+            <h3 class="tittle text-center">Add New Movie</h3>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row main">
+                    <div class="col-md-6">
+                        <input type="text" name="movie_name" placeholder="Movie Name" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <select name="emotion_type" required>
+                            <option value="">Select Emotion Type</option>
+                            <option value="angry">Angry</option>
+                            <option value="fear">Fear</option>
+                            <option value="happy">Happy</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="sad">Sad</option>
+                            <option value="surprise">Surprise</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea name="description" placeholder="Description" required></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="url" name="movie_link" placeholder="Movie Link" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="number" step="0.1" min="0" max="5"
+                               name="star_rating"
+                               placeholder="Star Rating (0.0 - 5.0)" required>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input type="file" name="image" accept="image/*">
+                    </div>
+
+                    <div class="book col-12 text-center">
+                        <input type="submit" value="Add Movie">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

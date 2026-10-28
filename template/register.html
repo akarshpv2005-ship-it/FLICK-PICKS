@@ -1,0 +1,161 @@
+{% extends 'common.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+    alert('{{ m }}');
+</script>
+{% endfor %}
+
+{% block content %}
+
+<style>
+/* ===== REGISTER PAGE ===== */
+.contact {
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)),
+    url("{% static 'images/register-bg.jpg' %}") center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.inner-sec-w3layouts {
+    background: rgba(15, 15, 15, 0.95);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.85);
+}
+
+.tittle {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+
+.sub-tittle {
+    color: #e50914;
+}
+
+.main input,
+.main textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background: #1c1c1c;
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 22px;
+}
+
+.main textarea {
+    border-radius: 18px;
+    resize: none;
+    height: 120px;
+}
+
+.main input::placeholder,
+.main textarea::placeholder {
+    color: #aaa;
+}
+
+.main input:focus,
+.main textarea:focus {
+    border: 1px solid #e50914;
+}
+
+.book input[type="submit"] {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    padding: 12px 55px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.book input[type="submit"]:hover {
+    background: #b20710;
+    transform: translateY(-2px);
+}
+
+.register-extra {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.register-extra a {
+    color: #e50914;
+    font-size: 14px;
+}
+
+.register-extra a:hover {
+    color: #fff;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .inner-sec-w3layouts {
+        padding: 30px 20px;
+    }
+}
+</style>
+
+<section class="about contact py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3layouts">
+            <h3 class="tittle text-center">
+                <span class="sub-tittle">Join Us</span><br>
+                Create Your Account
+            </h3>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="row main">
+
+                    <div class="col-md-6">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="email" name="email" placeholder="Email Address" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" name="phone number"
+                               minlength="10" maxlength="10"
+                               placeholder="Phone Number" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" name="password"
+                               placeholder="Password"
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                               title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 characters"
+                               required>
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea name="address" placeholder="Address" required></textarea>
+                    </div>
+
+                    <div class="book col-12 text-center">
+                        <input type="submit" value="Register">
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="register-extra">
+                <p>Already have an account?
+                    <a href="/login">Login Here</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'admin/adminhome.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h3 class="tittle text-center mb-4">Manage Added Movies</h3>
+        
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Image</th>
+                        <th>Movie Name</th>
+                        <th>Emotion</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                        <th>Action</th> </tr>
+                </thead>
+                <tbody>
+                    {% for m in movies %}
+                    <tr>
+                        <td>
+                            {% if m.image %}
+                                <img src="../static/media/{{ m.image.url }}" alt="poster" style="width: 80px; height: auto; border-radius: 5px;">
+                            {% else %}
+                                <span>No Image</span>
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ m.movie_name }}</strong></td>
+                        <td><span class="badge badge-info">{{ m.emotion_type|capfirst }}</span></td>
+                        <td>⭐ {{ m.star_rating }} / 5.0</td>
+                        <td style="max-width: 250px; font-size: 0.9em;">{{ m.description|truncatewords:10 }}</td>
+                        <td>
+                            <a href="{{ m.movie_link }}" target="_blank" class="btn btn-sm btn-primary">Watch</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_movie' %}?id={{ m.id }}" 
+                               class="btn btn-sm btn-danger" 
+                               onclick="return confirm('Are you sure you want to delete this movie?')">
+                               Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">No movies found in the database.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

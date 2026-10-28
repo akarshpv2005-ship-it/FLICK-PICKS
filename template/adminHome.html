@@ -1,0 +1,83 @@
+{% extends 'common.html' %}
+{% load static %}
+{% for m in messages %}
+<script>
+    alert('{{m}}')
+</script>
+{% endfor %}
+{% block content %}
+<section class="about py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3layouts py-lg-5 py-3">
+            <h3 class="tittle text-center"><span class="sub-tittle"></span>Admin Dashboard</h3>
+
+            <!-- Add Movie Form -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Add New Movie</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" name="movie_name" placeholder="Movie Name" required="">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <select class="form-control" name="emotion_type" required="">
+                                            <option value="">Select Emotion Type</option>
+                                            <option value="angry">Angry</option>
+                                            <option value="fear">Fear</option>
+                                            <option value="happy">Happy</option>
+                                            <option value="neutral">Neutral</option>
+                                            <option value="sad">Sad</option>
+                                            <option value="surprise">Surprise</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <textarea class="form-control" name="description" placeholder="Description" rows="3" required=""></textarea>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="url" class="form-control" name="movie_link" placeholder="Movie Link" required="">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="number" step="0.1" min="0.0" max="5.0" class="form-control" name="star_rating" placeholder="Star Rating (0.0-5.0)" required="">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <input type="file" class="form-control" name="image" accept="image/*">
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-primary">Add Movie</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movies List -->
+            <h4 class="text-center mb-4">All Movies</h4>
+            <div class="row">
+                {% for movie in movies %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if movie.image %}
+                        <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.movie_name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ movie.movie_name }}</h5>
+                            <p class="card-text">{{ movie.description|truncatechars:100 }}</p>
+                            <p class="card-text"><small class="text-muted">Emotion: {{ movie.emotion_type }} | Rating: {{ movie.star_rating }}/5</small></p>
+                            <a href="{{ movie.movie_link }}" target="_blank" class="btn btn-primary">Watch Movie</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

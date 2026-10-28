@@ -1,0 +1,123 @@
+{% extends 'User/userHome.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+    alert('{{ m }}');
+</script>
+{% endfor %}
+
+{% block content %}
+
+<style>
+/* ===== FEEDBACK PAGE STYLING ===== */
+.contact {
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
+    url("{% static 'images/login-bg.jpg' %}") center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.inner-sec-w3layouts {
+    background: rgba(15, 15, 15, 0.95);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+.tittle {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.sub-tittle {
+    color: #e50914;
+}
+
+.main input[type="text"],
+.main textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background: #1c1c1c;
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.main textarea {
+    border-radius: 20px;
+    resize: none;
+}
+
+.main input::placeholder,
+.main textarea::placeholder {
+    color: #aaa;
+}
+
+.main input:focus,
+.main textarea:focus {
+    border: 1px solid #e50914;
+}
+
+.book input[type="submit"] {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    padding: 12px 45px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.book input[type="submit"]:hover {
+    background: #b20710;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .inner-sec-w3layouts {
+        padding: 30px 20px;
+    }
+}
+</style>
+
+<section class="about contact py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3layouts">
+
+            <h3 class="tittle text-center">
+                <span class="sub-tittle">Your Opinion Matters</span><br>
+                Add Feedback
+            </h3>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="row main justify-content-center">
+
+                    <div class="col-md-8">
+                        <input type="text" name="subject" placeholder="Feedback Subject" required>
+                    </div>
+
+                    <div class="col-md-8">
+                        <textarea name="feedback" rows="5" placeholder="Write your feedback here..." required></textarea>
+                    </div>
+
+                    <div class="book col-12 text-center">
+                        <input type="submit" value="Submit Feedback">
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
